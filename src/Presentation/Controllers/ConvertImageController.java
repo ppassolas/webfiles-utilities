@@ -36,9 +36,7 @@ public class ConvertImageController implements ActionListener {
                         e1.printStackTrace();
                     }
                 }
-
             }
-
         }
     }
 }

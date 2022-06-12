@@ -1,6 +1,5 @@
 package Presentation.Views;
 
-import Business.Converter;
 import Business.Enums.DefaultValues;
 import Presentation.Components.Button;
 import Presentation.Controllers.ConvertImageController;
@@ -63,11 +62,9 @@ public class Window extends JFrame {
     public static final String GOTO_CONVERT_IMAGE_FILE = "Convert image file";
 
     private final ActionListener actionListener;
-    private final Converter converter;
 
-    public Window(ActionListener actionListener, Converter converter) {
+    public Window(ActionListener actionListener) {
         this.actionListener = actionListener;
-        this.converter = converter;
         setupButtons();
         setupCards();
         setupView();
@@ -145,10 +142,10 @@ public class Window extends JFrame {
         PDFToImageController pdfToImageController = new PDFToImageController(bGoToPDFtoImageFolder, bGoToPDFtoImageFile, bGoBackPDFtoImage);
         pPDFtoImage = pdfToImageController.getPDFToImage();
 
-        PDFToImageFolderController pdfToImageFolderController = new PDFToImageFolderController(bGoBackPDFtoImageFolder, converter);
+        PDFToImageFolderController pdfToImageFolderController = new PDFToImageFolderController(bGoBackPDFtoImageFolder);
         pPDFtoImageFolder = pdfToImageFolderController.getPdfToImageFolder();
 
-        PDFToImageFileController pdfToImageFileController = new PDFToImageFileController(bGoBackPDFtoImageFile, converter);
+        PDFToImageFileController pdfToImageFileController = new PDFToImageFileController(bGoBackPDFtoImageFile);
         pPDFtoImageFile = pdfToImageFileController.getPdfToImageFile();
 
 

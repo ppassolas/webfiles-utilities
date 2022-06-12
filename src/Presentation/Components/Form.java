@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Form extends JPanel {
     private final ActionListener actionListener;
@@ -144,7 +145,7 @@ public class Form extends JPanel {
                     value = ((JTextArea) parameter.component).getText();
                 }
                 case COMBO_BOX -> {
-                    value = ((JComboBox<String>) parameter.component).getSelectedItem().toString();
+                    value = Objects.requireNonNull(((JComboBox<String>) parameter.component).getSelectedItem()).toString();
                 }
                 case PATH_IMAGE_SELECTOR, PATH_PDF_SELECTOR, PATH_FOLDER_SELECTOR -> {
                     value = buttons[parameter.position].getText();

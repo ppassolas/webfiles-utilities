@@ -1,5 +1,6 @@
 package Presentation.Components;
 
+import Business.Enums.ImageFormats;
 import Presentation.Enums.FormElementType;
 
 import javax.swing.*;
@@ -22,7 +23,7 @@ public class PathSelector extends JFileChooser {
             case PATH_IMAGE_SELECTOR -> {
                 setFileSelectionMode(JFileChooser.FILES_ONLY);
                 setAcceptAllFileFilterUsed(false);
-                addChoosableFileFilter(new FileNameExtensionFilter("Images", "jpg", "png", "gif", "bmp"));
+                addChoosableFileFilter(new FileNameExtensionFilter("Images", ImageFormats.GIF, ImageFormats.JPG, ImageFormats.PNG, ImageFormats.JPEG, ImageFormats.WEBP));
             }
             case PATH_FOLDER_SELECTOR -> setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         }

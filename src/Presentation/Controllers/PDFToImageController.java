@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 
 
 public class PDFToImageController implements ActionListener {
-
     PDFtoImage pdFtoImage;
 
     public PDFToImageController(JButton bGoToPDFtoImageFolder, JButton bGoToPDFtoImageFile, JButton bGoToMain) {

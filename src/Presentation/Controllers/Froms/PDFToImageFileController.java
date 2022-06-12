@@ -10,11 +10,9 @@ import java.util.ArrayList;
 public class PDFToImageFileController implements FormRunInterface {
 
     PDFToImageFile pdfToImageFile;
-    Converter converter;
 
-    public PDFToImageFileController(JButton bGoBack, Converter c) {
+    public PDFToImageFileController(JButton bGoBack) {
         this.pdfToImageFile = new PDFToImageFile(bGoBack, this);
-        this.converter = c;
     }
 
     public PDFToImageFile getPdfToImageFile() {

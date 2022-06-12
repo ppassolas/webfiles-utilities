@@ -11,8 +11,8 @@ import static Presentation.Components.Form.RUN;
 
 
 public class FormController implements ActionListener {
-    private Form form;
-    private FormRunInterface fromImplementation;
+    private final Form form;
+    private final FormRunInterface fromImplementation;
 
     public FormController(String title, FormRunInterface fromImplementation) {
         this.form = new Form(title, this);

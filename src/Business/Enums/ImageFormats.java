@@ -5,5 +5,5 @@ public class ImageFormats {
     public static final String PNG = "png";
     public static final String GIF = "gif";
     public static final String WEBP = "webp";
-
+    public static final String JPEG = "jpeg";
 }

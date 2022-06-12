@@ -1,5 +1,6 @@
 package Business;
 
+import Business.Enums.ImageFormats;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.ImageType;
 import org.apache.pdfbox.rendering.PDFRenderer;
@@ -17,6 +18,34 @@ public class Converter {
 
     public Converter() {
 
+    }
+
+    public static void convertImagesFromFolder(String folderPath, String imageFormat, int width, int height) {
+        File directoryPath = new File(folderPath);
+
+        ArrayList<String> list = new ArrayList<>(Arrays.asList(Objects.requireNonNull(directoryPath.list())));
+        list = filterImages(list);
+        for (String element : list) {
+            String path = folderPath + "\\" + element;
+            BufferedImage image = readImage(path, width, height);
+            saveImage(image, imageFormat, path);
+        }
+    }
+
+    public static void convertImagesFromFile(String filePath, String imageFormat, int width, int height) {
+        BufferedImage image = readImage(filePath, width, height);
+        saveImage(image, generateNewFilePath(filePath, imageFormat), imageFormat);
+    }
+
+    public static BufferedImage readImage(String filePath, int width, int height) {
+        BufferedImage image;
+        try {
+            image = ImageIO.read(new File(filePath));
+            image = resizeImage(image, width, height);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return image;
     }
 
     public static void generateCoversOfPdfsFromFolder(String folderPath, String imageFormat, int width, int height) {
@@ -41,6 +70,16 @@ public class Converter {
         return filteredList;
     }
 
+    private static ArrayList<String> filterImages(ArrayList<String> list) {
+        ArrayList<String> filteredList = new ArrayList<>();
+        for (String element : list) {
+            if (element.endsWith(ImageFormats.JPG) || element.endsWith(ImageFormats.JPEG) || element.endsWith(ImageFormats.PNG) || element.endsWith(ImageFormats.GIF)) {
+                filteredList.add(element);
+            }
+        }
+        return filteredList;
+    }
+
     public static void generateCoverOfPdfFile(String filePath, String imageFormat, int width, int height) {
         BufferedImage image = convertPDFCoverToImg(filePath, width, height);
         saveImage(image, generateNewFilePath(filePath, imageFormat), imageFormat);
@@ -57,8 +96,8 @@ public class Converter {
     }
 
     private static BufferedImage generateImageFromPDF(String filePath, int page, int width, int height) {
-        PDDocument document = null;
-        BufferedImage image = null;
+        PDDocument document;
+        BufferedImage image;
         try {
             document = PDDocument.load(new File(filePath));
             PDFRenderer pdfRenderer = new PDFRenderer(document);

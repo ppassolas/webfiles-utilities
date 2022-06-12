@@ -1,6 +1,5 @@
 package Presentation.Controllers;
 
-import Business.Converter;
 import Presentation.Views.Window;
 
 import java.awt.event.ActionEvent;
@@ -10,11 +9,9 @@ import static Presentation.Views.Window.*;
 
 public class WindowController implements ActionListener {
     Window window;
-    Converter converter;
 
     public WindowController() {
-        this.converter = new Converter();
-        this.window = new Window(this, converter);
+        this.window = new Window(this);
     }
 
     @Override
@@ -62,7 +59,6 @@ public class WindowController implements ActionListener {
                     window.switchPanel(CONVERT_IMAGE_FOLDER);
                 }
             }
-
         }
     }
 }
