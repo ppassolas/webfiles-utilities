@@ -42,10 +42,14 @@ public class FormController implements ActionListener {
         if (RUN.equals(e.getActionCommand())) {
             ArrayList<String> values = form.getValues();
             if (values.size() > 0) {
-                fromImplementation.run();
+                fromImplementation.run(values);
             }
         } else {
             form.buttonClicked(command);
         }
+    }
+
+    public void clearForm() {
+        form.clearForm();
     }
 }

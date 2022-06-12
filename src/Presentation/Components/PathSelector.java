@@ -3,22 +3,32 @@ package Presentation.Components;
 import Presentation.Enums.FormElementType;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class PathSelector extends JFileChooser {
 
-    JFileChooser fileChooser;
+
     String selected = "";
 
 
     public PathSelector(FormElementType type) {
-        fileChooser = new JFileChooser();
+        super();
         switch (type) {
-            case PATH_FILE_SELECTOR -> fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            case PATH_FOLDER_SELECTOR -> fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            case PATH_PDF_SELECTOR -> {
+                setFileSelectionMode(JFileChooser.FILES_ONLY);
+                setAcceptAllFileFilterUsed(false);
+                addChoosableFileFilter(new FileNameExtensionFilter("PDF Documents", "pdf"));
+            }
+            case PATH_IMAGE_SELECTOR -> {
+                setFileSelectionMode(JFileChooser.FILES_ONLY);
+                setAcceptAllFileFilterUsed(false);
+                addChoosableFileFilter(new FileNameExtensionFilter("Images", "jpg", "png", "gif", "bmp"));
+            }
+            case PATH_FOLDER_SELECTOR -> setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         }
-        int returnVal = fileChooser.showOpenDialog(this);
+        int returnVal = showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            selected = fileChooser.getSelectedFile().getAbsolutePath();
+            selected = getSelectedFile().getAbsolutePath();
         }
     }
 

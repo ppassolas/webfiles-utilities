@@ -1,5 +1,6 @@
 package Presentation.Components;
 
+import Business.DefaultValues;
 import Presentation.Enums.*;
 
 import javax.swing.*;
@@ -31,21 +32,25 @@ public class Form extends JPanel {
             this.label = new JLabel(label);
             this.isMandatory = isMandatory;
             this.type = elementType;
-            this.component = createComponent(this.type, this.position);
+            this.component = createComponent(this.type, this.position, label);
         }
 
-        private JComponent createComponent(FormElementType elementType, int position) {
+        private JComponent createComponent(FormElementType elementType, int position, String label) {
             JComponent component = null;
             switch (elementType) {
                 case TEXT_FIELD -> component = new JTextField();
                 case NUMBER_FIELD -> {
-                    SpinnerModel model = new SpinnerNumberModel(200, 10, 9000, 1);
+                    SpinnerModel model;
+                    if (label.toLowerCase().contains("width"))
+                        model = new SpinnerNumberModel(DefaultValues.DEFAULT_WIDTH, DefaultValues.MIN_WIDTH, DefaultValues.MAX_WIDTH, 1);
+                    else
+                        model = new SpinnerNumberModel(DefaultValues.DEFAULT_HEIGHT, DefaultValues.MIN_HEIGHT, DefaultValues.MAX_HEIGHT, 1);
                     component = new JSpinner(model);
                 }
                 case TEXT_AREA -> component = new JTextArea();
                 case COMBO_BOX -> component = new JComboBox<>();
-                case PATH_FILE_SELECTOR, PATH_FOLDER_SELECTOR -> {
-                    JButton button = new Button("Select Path", ButtonType.TERTIARY, ButtonSize.SMALL);
+                case PATH_IMAGE_SELECTOR, PATH_PDF_SELECTOR, PATH_FOLDER_SELECTOR -> {
+                    JButton button = new Button(DefaultValues.SELECT_PATH, ButtonType.TERTIARY, ButtonSize.SMALL);
                     button.addActionListener(actionListener);
                     button.setActionCommand(String.valueOf(position));
                     buttons[position] = button;
@@ -90,7 +95,7 @@ public class Form extends JPanel {
 
     public Form(String title, ActionListener listener) {
         this.actionListener = listener;
-        setPreferredSize(new Dimension(900, 500));
+        setPreferredSize(new Dimension(DefaultValues.FRAME_WIDTH, DefaultValues.FRAME_HEIGHT - 100));
         setLayout(null);
         this.title = new JLabel(title);
         this.title.setFont(Fonts.H4);
@@ -141,9 +146,9 @@ public class Form extends JPanel {
                 case COMBO_BOX -> {
                     value = ((JComboBox<String>) parameter.component).getSelectedItem().toString();
                 }
-                case PATH_FILE_SELECTOR, PATH_FOLDER_SELECTOR -> {
+                case PATH_IMAGE_SELECTOR, PATH_FOLDER_SELECTOR -> {
                     value = buttons[parameter.position].getText();
-                    if(value.contains("Select Path")) value = "";
+                    if (value.contains(DefaultValues.SELECT_PATH)) value = "";
                 }
             }
             if (parameter.isMandatory && value.isEmpty()) {
@@ -154,6 +159,31 @@ public class Form extends JPanel {
         }
         return values;
     }
+
+    public void clearForm() {
+        for (Parameter parameter : parameters) {
+            switch (parameter.type) {
+                case TEXT_FIELD -> {
+                    ((JTextField) parameter.component).setText("");
+                }
+                case NUMBER_FIELD -> {
+                    if (((JLabel) parameter.label).getText().toLowerCase().contains("width"))
+                        ((JSpinner) parameter.component).setValue(DefaultValues.DEFAULT_WIDTH);
+                    else ((JSpinner) parameter.component).setValue(DefaultValues.DEFAULT_HEIGHT);
+                }
+                case TEXT_AREA -> {
+                    ((JTextArea) parameter.component).setText("");
+                }
+                case COMBO_BOX -> {
+                    ((JComboBox<String>) parameter.component).setSelectedIndex(0);
+                }
+                case PATH_IMAGE_SELECTOR, PATH_PDF_SELECTOR, PATH_FOLDER_SELECTOR -> {
+                    buttons[parameter.position].setText(DefaultValues.SELECT_PATH);
+                }
+            }
+        }
+    }
+
 
 }
 

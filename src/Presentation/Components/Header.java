@@ -29,6 +29,11 @@ public class Header extends JPanel {
         add(lastLine(line3), BorderLayout.SOUTH);
     }
 
+    public Header(JButton leftButton) {
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        add(button(leftButton));
+    }
+
     private JPanel button(JButton leftButton) {
         JPanel goBack = new JPanel();
         goBack.setSize(new Dimension(100, 100));
@@ -62,19 +67,19 @@ public class Header extends JPanel {
         return title;
     }
 
-    private JPanel lastLine(String line3){
+    private JPanel lastLine(String line3) {
         JPanel lastLine = new JPanel();
         lastLine.setLayout(new BoxLayout(lastLine, BoxLayout.Y_AXIS));
         lastLine.setBackground(Colors.WHITE);
 
-        JLabel lTitle = new JLabel("<html>"+ line3 +"</html>");
+        JLabel lTitle = new JLabel("<html>" + line3 + "</html>");
         lTitle.setFont(Fonts.H5);
         lTitle.setForeground(Colors.GREY);
         lTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         lastLine.add(lTitle);
 
-        lastLine.setBorder(new EmptyBorder( 30, 50, 5, 50));
+        lastLine.setBorder(new EmptyBorder(30, 50, 5, 50));
 
         return lastLine;
     }
@@ -83,7 +88,7 @@ public class Header extends JPanel {
         JPanel blank = new JPanel();
         blank.setBackground(Colors.WHITE);
         blank.setSize(new Dimension(100, 100));
-        blank.setBorder(new EmptyBorder( 0, 50, 0, 50));
+        blank.setBorder(new EmptyBorder(0, 50, 0, 50));
         return blank;
     }
 }

@@ -1,16 +1,10 @@
-package Presentation.Controllers;
+package Presentation.Controllers.Froms;
 
+import Presentation.Controllers.FormRunInterface;
 import Presentation.Views.ConvertImageFolder;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-
-import static Presentation.Views.SelectMode.ABOUT;
+import java.util.ArrayList;
 
 public class ConvertImageFolderController implements FormRunInterface {
 
@@ -25,7 +19,12 @@ public class ConvertImageFolderController implements FormRunInterface {
     }
 
 
-    public void run() {
-        System.out.println("ConvertImageFolderController.run()");
+    public void run(ArrayList<String> values) {
+        clearForm();
+        //TODO: run convert
+    }
+
+    public void clearForm() {
+        convertImageFolder.clearForm();
     }
 }

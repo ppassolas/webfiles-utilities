@@ -1,8 +1,12 @@
 package Presentation.Views;
 
+import Business.DefaultValues;
 import Presentation.Components.Button;
 import Presentation.Controllers.ConvertImageController;
-import Presentation.Controllers.ConvertImageFolderController;
+import Presentation.Controllers.Froms.ConvertImageFileController;
+import Presentation.Controllers.Froms.ConvertImageFolderController;
+import Presentation.Controllers.Froms.PDFToImageFileController;
+import Presentation.Controllers.Froms.PDFToImageFolderController;
 import Presentation.Controllers.PDFToImageController;
 import Presentation.Controllers.SelectModeController;
 import Presentation.Enums.ButtonSize;
@@ -49,7 +53,7 @@ public class Window extends JFrame {
 
 
     // Buttons text and identifiers
-    public static final String GOTO_MAIN = "Go back";
+    public static final String GOTO_MAIN = DefaultValues.GO_BACK;
     public static final String GOTO_PDF_TO_IMAGE = "PDF to image";
     public static final String GOTO_PDF_TO_IMAGE_FOLDER = "PDF to image folder";
     public static final String GOTO_PDF_TO_IMAGE_FILE = "PDF to image file";
@@ -99,7 +103,7 @@ public class Window extends JFrame {
         bGoBackConvertImage.addActionListener(actionListener);
         bGoBackConvertImage.setActionCommand(GOTO_MAIN);
 
-        bGoBackPDFtoImageFolder = new Button(GOTO_PDF_TO_IMAGE, ButtonType.SECONDARY, ButtonSize.SMALL);
+        bGoBackPDFtoImageFolder = new Button(DefaultValues.GO_BACK, ButtonType.SECONDARY, ButtonSize.SMALL);
         bGoBackPDFtoImageFolder.addActionListener(actionListener);
         bGoBackPDFtoImageFolder.setActionCommand(GOTO_PDF_TO_IMAGE);
 
@@ -107,11 +111,11 @@ public class Window extends JFrame {
         bGoBackPDFtoImageFile.addActionListener(actionListener);
         bGoBackPDFtoImageFile.setActionCommand(GOTO_PDF_TO_IMAGE);
 
-        bGoBackConvertImageFolder = new Button(GOTO_CONVERT_IMAGE, ButtonType.SECONDARY, ButtonSize.SMALL);
+        bGoBackConvertImageFolder = new Button(DefaultValues.GO_BACK, ButtonType.SECONDARY, ButtonSize.SMALL);
         bGoBackConvertImageFolder.addActionListener(actionListener);
         bGoBackConvertImageFolder.setActionCommand(GOTO_CONVERT_IMAGE);
 
-        bGoBackConvertImageFile = new Button(GOTO_CONVERT_IMAGE, ButtonType.SECONDARY, ButtonSize.SMALL);
+        bGoBackConvertImageFile = new Button(DefaultValues.GO_BACK, ButtonType.SECONDARY, ButtonSize.SMALL);
         bGoBackConvertImageFile.addActionListener(actionListener);
         bGoBackConvertImageFile.setActionCommand(GOTO_CONVERT_IMAGE);
 
@@ -129,8 +133,8 @@ public class Window extends JFrame {
         ConvertImageController convertImageController = new ConvertImageController(bGoToConvertImageFolder, bGoToConvertImageFile, bGoBackConvertImage);
         pConvertImage = convertImageController.getConvertImage();
 
-
-        pConvertImageFile = new ConvertImageFile(bGoBackConvertImageFile);
+        ConvertImageFileController convertImageFileController = new ConvertImageFileController(bGoBackConvertImageFile);
+        pConvertImageFile = convertImageFileController.getConvertImageFile();
 
         ConvertImageFolderController convertImageFolderController = new ConvertImageFolderController(bGoBackConvertImageFolder);
         pConvertImageFolder = convertImageFolderController.getConvertImageFolder();
@@ -138,8 +142,12 @@ public class Window extends JFrame {
         PDFToImageController pdfToImageController = new PDFToImageController(bGoToPDFtoImageFolder, bGoToPDFtoImageFile, bGoBackPDFtoImage);
         pPDFtoImage = pdfToImageController.getPDFToImage();
 
-        pPDFtoImageFile = new PDFToImageFolder(bGoBackPDFtoImageFile);
-        pPDFtoImageFolder = new PDFToImageFile(bGoBackPDFtoImageFolder);
+        PDFToImageFolderController pdfToImageFolderController = new PDFToImageFolderController(bGoBackPDFtoImageFolder);
+        pPDFtoImageFolder = pdfToImageFolderController.getPdfToImageFolder();
+
+        PDFToImageFileController pdfToImageFileController = new PDFToImageFileController(bGoBackPDFtoImageFile);
+        pPDFtoImageFile = pdfToImageFileController.getPdfToImageFile();
+
 
         // Add the cards to the Card Layout
         cPane.add(MAIN_MENU, pMainMenu);
@@ -152,13 +160,13 @@ public class Window extends JFrame {
     }
 
     private void setupView() {
-        setTitle("WEBFILES UTILITIES");
-        setBounds(300, 90, 900, 600);
+        setTitle(DefaultValues.TITLE);
+        setBounds(300, 90, DefaultValues.FRAME_WIDTH, DefaultValues.FRAME_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
-        ImageIcon icon = new ImageIcon("./src/resources/logo.jpg");
+        ImageIcon icon = new ImageIcon(DefaultValues.ICON_PATH);
         setIconImage(icon.getImage());
     }
 

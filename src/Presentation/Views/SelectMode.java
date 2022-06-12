@@ -1,5 +1,6 @@
 package Presentation.Views;
 
+import Business.DefaultValues;
 import Presentation.Components.Button;
 import Presentation.Components.Header;
 import Presentation.Components.OptionSelector;
@@ -30,7 +31,7 @@ public class SelectMode extends JPanel {
         setLayout(layout);
         setBackground(Colors.WHITE);
 
-        Header header = new Header("SELECT MODE", "By: AIPL Impulsa SL", "Select mode:");
+        Header header = new Header(DefaultValues.TITLE ,"By: AIPL Impulsa SL", "Select mode:");
         add(header, BorderLayout.NORTH);
 
         ArrayList<OptionSelector.Option> options = new ArrayList<>();
