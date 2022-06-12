@@ -1,6 +1,6 @@
 package Presentation.Views;
 
-import Business.DefaultValues;
+import Business.Enums.DefaultValues;
 import Presentation.Components.Button;
 import Presentation.Components.Header;
 import Presentation.Components.OptionSelector;

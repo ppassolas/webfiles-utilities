@@ -1,6 +1,6 @@
 package Presentation.Components;
 
-import Business.DefaultValues;
+import Business.Enums.DefaultValues;
 import Presentation.Enums.*;
 
 import javax.swing.*;
@@ -146,7 +146,7 @@ public class Form extends JPanel {
                 case COMBO_BOX -> {
                     value = ((JComboBox<String>) parameter.component).getSelectedItem().toString();
                 }
-                case PATH_IMAGE_SELECTOR, PATH_FOLDER_SELECTOR -> {
+                case PATH_IMAGE_SELECTOR, PATH_PDF_SELECTOR, PATH_FOLDER_SELECTOR -> {
                     value = buttons[parameter.position].getText();
                     if (value.contains(DefaultValues.SELECT_PATH)) value = "";
                 }

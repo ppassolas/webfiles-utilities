@@ -1,6 +1,7 @@
 package Presentation.Views;
 
-import Business.DefaultValues;
+import Business.Converter;
+import Business.Enums.DefaultValues;
 import Presentation.Components.Button;
 import Presentation.Controllers.ConvertImageController;
 import Presentation.Controllers.Froms.ConvertImageFileController;
@@ -62,9 +63,11 @@ public class Window extends JFrame {
     public static final String GOTO_CONVERT_IMAGE_FILE = "Convert image file";
 
     private final ActionListener actionListener;
+    private final Converter converter;
 
-    public Window(ActionListener actionListener) {
+    public Window(ActionListener actionListener, Converter converter) {
         this.actionListener = actionListener;
+        this.converter = converter;
         setupButtons();
         setupCards();
         setupView();
@@ -107,7 +110,7 @@ public class Window extends JFrame {
         bGoBackPDFtoImageFolder.addActionListener(actionListener);
         bGoBackPDFtoImageFolder.setActionCommand(GOTO_PDF_TO_IMAGE);
 
-        bGoBackPDFtoImageFile = new Button(GOTO_PDF_TO_IMAGE, ButtonType.SECONDARY, ButtonSize.SMALL);
+        bGoBackPDFtoImageFile = new Button(DefaultValues.GO_BACK, ButtonType.SECONDARY, ButtonSize.SMALL);
         bGoBackPDFtoImageFile.addActionListener(actionListener);
         bGoBackPDFtoImageFile.setActionCommand(GOTO_PDF_TO_IMAGE);
 
@@ -142,10 +145,10 @@ public class Window extends JFrame {
         PDFToImageController pdfToImageController = new PDFToImageController(bGoToPDFtoImageFolder, bGoToPDFtoImageFile, bGoBackPDFtoImage);
         pPDFtoImage = pdfToImageController.getPDFToImage();
 
-        PDFToImageFolderController pdfToImageFolderController = new PDFToImageFolderController(bGoBackPDFtoImageFolder);
+        PDFToImageFolderController pdfToImageFolderController = new PDFToImageFolderController(bGoBackPDFtoImageFolder, converter);
         pPDFtoImageFolder = pdfToImageFolderController.getPdfToImageFolder();
 
-        PDFToImageFileController pdfToImageFileController = new PDFToImageFileController(bGoBackPDFtoImageFile);
+        PDFToImageFileController pdfToImageFileController = new PDFToImageFileController(bGoBackPDFtoImageFile, converter);
         pPDFtoImageFile = pdfToImageFileController.getPdfToImageFile();
 
 

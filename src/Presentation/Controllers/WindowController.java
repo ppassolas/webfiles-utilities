@@ -1,5 +1,6 @@
 package Presentation.Controllers;
 
+import Business.Converter;
 import Presentation.Views.Window;
 
 import java.awt.event.ActionEvent;
@@ -9,9 +10,11 @@ import static Presentation.Views.Window.*;
 
 public class WindowController implements ActionListener {
     Window window;
+    Converter converter;
 
     public WindowController() {
-        this.window = new Window(this);
+        this.converter = new Converter();
+        this.window = new Window(this, converter);
     }
 
     @Override
