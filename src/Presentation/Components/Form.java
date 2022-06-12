@@ -41,11 +41,14 @@ public class Form extends JPanel {
             switch (elementType) {
                 case TEXT_FIELD -> component = new JTextField();
                 case NUMBER_FIELD -> {
-                    SpinnerModel model;
+                    SpinnerModel model = null;
                     if (label.toLowerCase().contains("width"))
                         model = new SpinnerNumberModel(DefaultValues.DEFAULT_WIDTH, DefaultValues.MIN_WIDTH, DefaultValues.MAX_WIDTH, 1);
-                    else
+                    else if (label.toLowerCase().contains("height"))
                         model = new SpinnerNumberModel(DefaultValues.DEFAULT_HEIGHT, DefaultValues.MIN_HEIGHT, DefaultValues.MAX_HEIGHT, 1);
+                    else if (label.toLowerCase().contains("page"))
+                        model = new SpinnerNumberModel(DefaultValues.DEFAULT_PAGE, DefaultValues.MIN_PAGE, DefaultValues.MAX_PAGE, 1);
+                    assert model != null;
                     component = new JSpinner(model);
                 }
                 case TEXT_AREA -> component = new JTextArea();
@@ -61,6 +64,7 @@ public class Form extends JPanel {
             return component;
         }
     }
+
 
     public void addComboBox(String label, boolean isMandatory, String[] options) {
         if (elementCount >= 17) return;
@@ -168,9 +172,13 @@ public class Form extends JPanel {
                     ((JTextField) parameter.component).setText("");
                 }
                 case NUMBER_FIELD -> {
-                    if (((JLabel) parameter.label).getText().toLowerCase().contains("width"))
+                    String value = ((JLabel) parameter.label).getText().toLowerCase();
+                    if (value.contains("width"))
                         ((JSpinner) parameter.component).setValue(DefaultValues.DEFAULT_WIDTH);
-                    else ((JSpinner) parameter.component).setValue(DefaultValues.DEFAULT_HEIGHT);
+                    else if (value.contains("height"))
+                        ((JSpinner) parameter.component).setValue(DefaultValues.DEFAULT_HEIGHT);
+                    else if (value.contains("page"))
+                        ((JSpinner) parameter.component).setValue(DefaultValues.DEFAULT_PAGE);
                 }
                 case TEXT_AREA -> {
                     ((JTextArea) parameter.component).setText("");

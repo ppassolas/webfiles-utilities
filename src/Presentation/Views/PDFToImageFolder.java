@@ -21,6 +21,7 @@ public class PDFToImageFolder extends JPanel {
         formController.addElement("New height (px)", true, FormElementType.NUMBER_FIELD);
         formController.addElement("Select folder", true, FormElementType.PATH_FOLDER_SELECTOR);
         formController.addComboBox("Select type", true,  DefaultValues.IMG_TYPES);
+        formController.addElement("Page",true, FormElementType.NUMBER_FIELD);
         formController.addRunButton("Convert");
         Header header = new Header(goBackButton);
         add(header);

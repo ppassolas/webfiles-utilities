@@ -14,7 +14,9 @@ public class DefaultValues {
     public final static int FRAME_HEIGHT = 600;
     public final static String ICON_PATH = "./src/resources/logo.png";
     public final static String TITLE = "WEBFILES UTILITIES";
-
     public final static String[] IMG_TYPES = {ImageFormats.JPG, ImageFormats.PNG, ImageFormats.GIF, ImageFormats.WEBP, ImageFormats.JPEG};
     public final static String SELECT_PATH = "Select path";
+    public static final int DEFAULT_PAGE = 1;
+    public static final int MIN_PAGE = 1;
+    public static final int MAX_PAGE = 200;
 }

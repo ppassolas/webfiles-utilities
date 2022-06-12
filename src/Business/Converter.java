@@ -48,14 +48,14 @@ public class Converter {
         return image;
     }
 
-    public static void generateCoversOfPdfsFromFolder(String folderPath, String imageFormat, int width, int height) {
+    public static void generateCoversOfPdfsFromFolder(String folderPath, String imageFormat, int width, int height, int page) {
         File directoryPath = new File(folderPath);
 
         ArrayList<String> list = new ArrayList<>(Arrays.asList(Objects.requireNonNull(directoryPath.list())));
         list = filterPDFs(list);
         for (String element : list) {
             String path = folderPath + "\\" + element;
-            BufferedImage image = convertPDFCoverToImg(path, width, height);
+            BufferedImage image = convertPDFCoverToImg(path, width, height, page);
             saveImage(image, generateNewFilePath(path, imageFormat), imageFormat);
         }
     }
@@ -80,8 +80,8 @@ public class Converter {
         return filteredList;
     }
 
-    public static void generateCoverOfPdfFile(String filePath, String imageFormat, int width, int height) {
-        BufferedImage image = convertPDFCoverToImg(filePath, width, height);
+    public static void generateCoverOfPdfFile(String filePath, String imageFormat, int width, int height, int page) {
+        BufferedImage image = convertPDFCoverToImg(filePath, width, height, page);
         saveImage(image, generateNewFilePath(filePath, imageFormat), imageFormat);
     }
 
@@ -91,8 +91,8 @@ public class Converter {
         return newFilePath;
     }
 
-    private static BufferedImage convertPDFCoverToImg(String filePath, int width, int height) {
-        return generateImageFromPDF(filePath, 1, width, height);
+    private static BufferedImage convertPDFCoverToImg(String filePath, int width, int height, int page) {
+        return generateImageFromPDF(filePath, page, width, height);
     }
 
     private static BufferedImage generateImageFromPDF(String filePath, int page, int width, int height) {

@@ -22,7 +22,7 @@ public class PDFToImageFileController implements FormRunInterface {
 
     public void run(ArrayList<String> values) {
         clearForm();
-        Converter.generateCoverOfPdfFile(values.get(2), values.get(3), Integer.parseInt(values.get(0)), Integer.parseInt(values.get(1)));
+        Converter.generateCoverOfPdfFile(values.get(2), values.get(3), Integer.parseInt(values.get(0)), Integer.parseInt(values.get(1)), Integer.parseInt(values.get(4)));
     }
 
     public void clearForm() {
