@@ -2,6 +2,7 @@ package Presentation.Views;
 
 import Presentation.Components.Button;
 import Presentation.Controllers.ConvertImageController;
+import Presentation.Controllers.ConvertImageFolderController;
 import Presentation.Controllers.PDFToImageController;
 import Presentation.Controllers.SelectModeController;
 import Presentation.Enums.ButtonSize;
@@ -128,8 +129,11 @@ public class Window extends JFrame {
         ConvertImageController convertImageController = new ConvertImageController(bGoToConvertImageFolder, bGoToConvertImageFile, bGoBackConvertImage);
         pConvertImage = convertImageController.getConvertImage();
 
+
         pConvertImageFile = new ConvertImageFile(bGoBackConvertImageFile);
-        pConvertImageFolder = new ConvertImageFolder(bGoBackConvertImageFolder);
+
+        ConvertImageFolderController convertImageFolderController = new ConvertImageFolderController(bGoBackConvertImageFolder);
+        pConvertImageFolder = convertImageFolderController.getConvertImageFolder();
 
         PDFToImageController pdfToImageController = new PDFToImageController(bGoToPDFtoImageFolder, bGoToPDFtoImageFile, bGoBackPDFtoImage);
         pPDFtoImage = pdfToImageController.getPDFToImage();
